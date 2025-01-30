@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import GoogleIcon from "../assets/icons/GoogleIcon";
 import { useAuthContext } from "../context/AuthProvider";
-import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [info , setInfo] = useState({firstName: '' , lastName: '',email: '', password: ''})
-  
+  const [info, setInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
-  const handleChange = (e) => setInfo({...info,[e.target.name]: e.target.value })
-  
-const {createUser} = useAuthContext()
+  const handleChange = (e) =>
+    setInfo({ ...info, [e.target.name]: e.target.value });
+
+  const { createUser } = useAuthContext();
   const handleSubmit = (e) => {
-    e.preventDefault()
-    createUser(info.email, info.password)
-    
-  }
+    e.preventDefault();
+    createUser(info.email, info.password);
+  };
   return (
     <div className="overflow-hidden flex-1 h-screen justify-center items-center dark:bg-gray-dark-main">
       <div
-        className={`mt-[3vh] mx-auto overflow-hidden relative w-[380px] h-[620px] rounded-[8px] dark:bg-[#1c1c1c] before:content-[""] before:absolute before:w-[380px] before:h-[420px] before:top-[-50%] before:left-[-50%] after:content-[""] after:absolute after:w-[380px] after:h-[420px] after:top-[-50%] after:left-[-50%] custom-linear-gradient`}
+        className={`mt-[3vh] mx-auto overflow-hidden relative w-[380px] h-[560px] rounded-[8px] dark:bg-[#1c1c1c] before:content-[""] before:absolute before:w-[380px] before:h-[420px] before:top-[-50%] before:left-[-50%] after:content-[""] after:absolute after:w-[380px] after:h-[420px] after:top-[-50%] after:left-[-50%] custom-linear-gradient`}
       >
         <form
           onSubmit={handleSubmit}
@@ -35,7 +38,6 @@ const {createUser} = useAuthContext()
               placeholder=" "
               required
               onChange={handleChange}
-             
             />
             <label htmlFor="floating_text">First Name</label>
           </div>
@@ -68,7 +70,7 @@ const {createUser} = useAuthContext()
               type="password"
               placeholder=" "
               required
-             onChange={handleChange}
+              onChange={handleChange}
             />
             <label htmlFor="floating_password">Password</label>
           </div>
@@ -78,7 +80,6 @@ const {createUser} = useAuthContext()
           <button
             type="button"
             className="btn-danger flex justify-between items-center"
-            
           >
             Continue with Google
             <GoogleIcon color="currentColor" />
@@ -89,4 +90,4 @@ const {createUser} = useAuthContext()
   );
 };
 
-export default Register;   
+export default Register;
