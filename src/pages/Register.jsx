@@ -16,7 +16,8 @@ const Register = () => {
   const { createUser } = useAuthContext();
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser(info.email, info.password);
+    const displayName = `${info.firstName} ${info.lastName}`
+    createUser(info.email, info.password, displayName);
   };
   return (
     <div className="overflow-hidden flex-1 h-screen justify-center items-center dark:bg-gray-dark-main">
