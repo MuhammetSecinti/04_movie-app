@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
 
 const Switch = () => {
   const [theme, setTheme] = useState(
@@ -15,14 +16,23 @@ const Switch = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white flex col-span-1 justify-end">
-      <button
-        onClick={toggleTheme}
-        className="px-4 py-2 bg-red-600 text-white rounded-md"
-      >
-        {theme === "dark" ? "Light Mode" : "Dark Mode"}
-      </button>
-    </div>
+    <div className="bg-white dark:bg-gray-900 text-black dark:text-white flex items-center justify-center">
+    <button
+      onClick={toggleTheme}
+      className="flex items-center gap-2 px-4 py-2 text-white rounded-md"
+    >
+      {theme === "dark" ? (
+        <>
+          <SunIcon className="w-6 h-6 text-yellow-500" />
+    
+        </>
+      ) : (
+        <>
+          <MoonIcon className="w-6 h-6 text-blue-400" />
+        </>
+      )}
+    </button>
+  </div>
   );
 };
 
