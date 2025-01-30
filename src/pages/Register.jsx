@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import GoogleIcon from "../assets/icons/GoogleIcon";
+import { useAuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [info , setInfo] = useState({firstName: '' , lastName: '',email: '', password: ''})
-
+  
 
   const handleChange = (e) => setInfo({...info,[e.target.name]: e.target.value })
   
-
+const {createUser} = useAuthContext()
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(info);
+    createUser(info.email, info.password)
+    
   }
   return (
     <div className="overflow-hidden flex-1 h-screen justify-center items-center dark:bg-gray-dark-main">

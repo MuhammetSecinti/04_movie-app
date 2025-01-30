@@ -15,7 +15,7 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
-const {currentUser} = useAuthContext()
+  const { currentUser } = useAuthContext();
   return (
     <>
       <Disclosure
@@ -60,7 +60,7 @@ const {currentUser} = useAuthContext()
                   </MenuItem>
                   <MenuItem>
                     <Link
-                      to=""
+                      to="/login"
                       className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                     >
                       Login
