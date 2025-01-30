@@ -8,13 +8,14 @@ import {
 import { Link } from "react-router-dom";
 import Switch from "./Switch";
 import avatar from "../assets/icons/avatar.png";
+import { useAuthContext } from "../context/AuthProvider";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Navbar = () => {
-  const currentUser = { displayName: "Muhammet Secinti" };
+const {currentUser} = useAuthContext()
   return (
     <>
       <Disclosure
