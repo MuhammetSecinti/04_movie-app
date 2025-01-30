@@ -10,12 +10,10 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { loginUser } = useAuthContext();
-  
+  const { loginUser, googleProvider, forgotPassword } = useAuthContext();
+
   const handleChange = (e) =>
     setInfo({ ...info, [e.target.name]: e.target.value });
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,7 +55,7 @@ const Login = () => {
             <label htmlFor="floating_password">Password</label>
           </div>
           <div className="flex justify-between">
-            <span className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]">
+            <span onClick={()=> forgotPassword(info.email)} className="py-3 font-[0.75em] cursor-pointer decoration-none text-gray-500 hover:text-[#ff4b45]">
               Forgot password
             </span>
             <Link
@@ -71,6 +69,7 @@ const Login = () => {
             Login
           </button>
           <button
+            onClick={() => googleProvider()}
             type="button"
             className="btn-danger flex justify-between items-center"
           >

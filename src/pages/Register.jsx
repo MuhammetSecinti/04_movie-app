@@ -9,11 +9,11 @@ const Register = () => {
     email: "",
     password: "",
   });
-
+  const { createUser, googleProvider } = useAuthContext();
   const handleChange = (e) =>
     setInfo({ ...info, [e.target.name]: e.target.value });
 
-  const { createUser } = useAuthContext();
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     const displayName = `${info.firstName} ${info.lastName}`
@@ -79,6 +79,7 @@ const Register = () => {
             Register
           </button>
           <button
+          onClick={()=> googleProvider()}
             type="button"
             className="btn-danger flex justify-between items-center"
           >

@@ -2,14 +2,17 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../auth/firebase";
 import {
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-import { toastErrorNotify, toastSuccessNotify } from "../helpers/ToastNotify";
+import { toastErrorNotify, toastSuccessNotify, toastWarnNotify } from "../helpers/ToastNotify";
 
 const AuthContext = createContext();
 
@@ -33,8 +36,8 @@ const AuthProvider = ({ children }) => {
         password
       );
       await updateProfile(auth.currentUser, {
-        displayName: displayName
-      })
+        displayName: displayName,
+      });
       navigate("/login");
       toastSuccessNotify("registered succesfully");
       console.log(userCredential);
@@ -71,8 +74,32 @@ const AuthProvider = ({ children }) => {
       }
     });
   };
-console.log(currentUser);
-  const values = { currentUser, createUser, loginUser, logOut };
+  const googleProvider = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        navigate("/");
+        toastSuccessNotify("logged out succesfully");
+      })
+      .catch((error) => {
+        toastErrorNotify("logout failed");
+      });
+  };
+
+  const forgotPassword = (email)=> {
+    sendPasswordResetEmail(auth, email)
+    .then(() => {
+      // Password reset email sent!
+      // ..
+      toastWarnNotify('Please check your mail box')
+    })
+    .catch((error) => {
+        toastErrorNotify(error.message);
+      // ..
+    });
+  }
+  console.log(currentUser);
+  const values = { currentUser, createUser, loginUser, logOut,googleProvider, forgotPassword };
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
 
