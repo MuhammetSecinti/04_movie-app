@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import { useMovieContext } from "../context/MovieProvider";
 import MovieCard from "../components/MovieCard";
 import { toastWarnNotify } from "../helpers/ToastNotify";
+import { useAuthContext } from "../context/AuthProvider";
 
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 const SEARCH_API = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
 
 const Main = () => {
   const { movies, loading, getMovies } = useMovieContext();
+  const { currentUser } = useAuthContext();
   console.log({ movies, loading });
+
   const [searchTerm, setSearchTerm] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-   if(searchTerm) {
-    getMovies(SEARCH_API + searchTerm)
-   } else{
-    toastWarnNotify('please enter a text')
-   }
+    if (searchTerm) {
+      getMovies(SEARCH_API + searchTerm);
+    } else if (!currentUser) {
+      toastWarnNotify("please log in to search a movie");
+    } else {
+      toastWarnNotify("please enter a text");
+    }
   };
 
   return (
