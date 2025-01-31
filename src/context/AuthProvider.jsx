@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
   const userObserver = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
+      
         const { email, displayName, photoURL } = user;
         setCurrentUser({ email, displayName, photoURL });
       } else {
