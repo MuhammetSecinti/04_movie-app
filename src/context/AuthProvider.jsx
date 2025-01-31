@@ -98,7 +98,7 @@ const AuthProvider = ({ children }) => {
       // ..
     });
   }
-  console.log(currentUser);
+  
   const values = { currentUser, createUser, loginUser, logOut,googleProvider, forgotPassword };
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };

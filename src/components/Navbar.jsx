@@ -81,7 +81,7 @@ const Navbar = () => {
           </div>
         </div>
       </Disclosure>
-      <div className="h-[57px]"></div>
+      <div className="h-[67px]"></div>
     </>
   );
 };
